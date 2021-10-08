@@ -1,0 +1,44 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header, main, footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+    width: 100%;
+}
+
+header {
+    height: 100px;
+    color: white;
+    background: black;
+}
+
+main {
+    flex-grow: 1;
+    width: 100%;
+}
+
+footer {
+    height: 50px;
+    background: black;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
