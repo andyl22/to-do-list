@@ -50,13 +50,14 @@ a {
     flex-direction: column;
     align-items: center;
     height: 300px;
-    width: 50%;
     max-width: 600px;
     min-width: 320px;
+    padding: 0px 10px 10px 10px;
 }
 
 .modal {
     display: flex;
+    flex-wrap: wrap;
     visibility: hidden;
     justify-content: center;
     align-items: center;
@@ -69,6 +70,7 @@ a {
 
 .modal-content {
     background: white;
+    width: 100%;
 }
 
 .modal-header {
@@ -77,22 +79,35 @@ a {
     margin-top: 10px;
 }
 
+
+
 .modal-inputs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 2;
+    grid-auto-flow: column;
+    grid-gap: 2%;
+    width: 35%;
+    height: 65%;
 }
 
 .close-modal {
     float: right;
     position: relative;
-    top: -60%;
-    left: -10px;
+    top: -25px;
+    left: -5px;
     font-size: 15px;
 }
 
 .close-modal:hover {
     cursor: pointer;
+}
+
+input[type=submit] {
+    margin-top: 15px;
+    grid-row: 4;
+    grid-column: 2;
+}
+
+input[type="text"] {
+    grid-column: 2;
 }

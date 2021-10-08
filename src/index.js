@@ -54,36 +54,44 @@ function addToDo() {
 
     function setupInputs() {
         const modal = document.getElementById("modal-content");
-        appendInputsToInputContainer(
-            ["Name", "taskDueDate", "description"], createInputContainer(modal)
-            );
+        const form = createInputForm(modal);
+        appendInputsToForm(["Name", "dueDate", "description"], form);
+        appendSubmitToForm(form)
     }
 
     function createInput(buttonName) {
         const input = document.createElement("input");
         input.type = "text";
+        input.required = true;
         input.placeholder = buttonName;
-        input.id = buttonName;
+        input.id = buttonName.toLowerCase();
         input.className = "modal-input"
         return input;
     }
 
-    function createInputContainer(modal) {
-        let inputsContainer = document.createElement("div");
+    function createInputForm(modal) {
+        let inputsContainer = document.createElement("form");
         inputsContainer.className = "modal-inputs"
         modal.appendChild(inputsContainer);
         return inputsContainer;
     }
 
-    function appendInputsToInputContainer(buttonList, inputsContainer) {
+    function appendInputsToForm(buttonList, inputsContainer) {
         buttonList.forEach(buttonName => inputsContainer.appendChild(createInput(buttonName)));
+    }
+
+    function appendSubmitToForm(form) {
+        const submit = document.createElement("input");
+        submit.type = "submit";
+        submit.addEventListener("click", function(e) {console.log(e)})
+        form.appendChild(submit);
     }
 }
 
-const todoFactory = function(name, taskDueDate, description) {
+const todoFactory = function(name, dueDate, description) {
     this.name = name;
     this.dateCreated = new Date (new Date().getTime()).toString();
-    this.taskDueDate = taskDueDate;
+    this.dueDate = dueDate;
     this.description = description;
 
     return this;
