@@ -16,43 +16,99 @@ body {
 
 header, main, footer {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 0;
     width: 100%;
+    background: rgb(65, 65, 65);
 }
 
 header {
-    height: 100px;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0px;
     color: white;
-    background: black;
+}
+
+h1 {
+    position: absolute;
+    left: 10px;
+    float: left;
 }
 
 main {
+    justify-content: flex-start;
+    min-height: 60%;
+    flex: 1;
+    background: rgb(242, 233, 233);
+}
+
+.button-container {
+    display: flex;
     flex-direction: column;
-    gap: 30px;
-    flex-grow: 1;
-    width: 100%;
+    gap: 20px;
+    padding: 10px;
+    background: white;
+    width: 150px;
 }
 
-footer {
+#add-todo {
     height: 50px;
-    background: black;
+    width: 100px;
+    border: none;
+    background: rgb(187, 138, 46);
+    color: white;
 }
 
-a {
-    text-decoration: none;
-    color: white;
+#add-todo:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+    background: rgb(157, 114, 34);
 }
 
 .main-content {
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.task-list {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    height: 300px;
-    max-width: 600px;
-    min-width: 320px;
-    padding: 0px 10px 10px 10px;
+    width: 33%;
+    height: 100%;
+    border-top: 1px solid rgb(172, 171, 171);
+    border-left: 1px solid rgb(172, 171, 171);
+    border-bottom: 1px solid rgb(172, 171, 171);
+    overflow: auto;
+}
+
+h2 {
+    margin-top: 20px;
+}
+#priority-one {
+}
+
+#priority-two {
+    
+}
+
+#priority-three {
+    border-right: 1px solid rgb(172, 171, 171);
+}
+
+.task-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    background: white;
+    padding: 40px;
+    border: 1px solid rgb(211, 211, 211);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 40px;
 }
 
 .modal {
@@ -69,6 +125,11 @@ a {
 }
 
 .modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    max-width: 600px;
+    min-width: 320px;
     background: white;
     width: 100%;
 }
@@ -79,8 +140,6 @@ a {
     margin-top: 10px;
 }
 
-
-
 .modal-inputs {
     display: grid;
     grid-template-columns: 2;
@@ -88,6 +147,7 @@ a {
     grid-gap: 2%;
     width: 35%;
     height: 65%;
+    margin-right: 100px;
 }
 
 .close-modal {
@@ -105,9 +165,25 @@ a {
 input[type=submit] {
     margin-top: 15px;
     grid-row: 4;
+}
+
+input  {
     grid-column: 2;
 }
 
-input[type="text"] {
-    grid-column: 2;
+label {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+footer {
+    padding: 10px 0px;
+    justify-content: center;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }
