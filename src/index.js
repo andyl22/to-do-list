@@ -143,18 +143,35 @@ function displayTasks(bypass=false) {
             taskDiv.appendChild(name);
             taskDiv.appendChild(dueDate);
             taskDiv.appendChild(description);
-            let currentDate = new Date().toISOString().split('T')[0];
-            let taskDate = taskElement.dueDate;
-            const msToSeconds = (1000*60*60*24);
-            let currentTimeDifference = (new Date(currentDate) - new Date(taskDate))/ msToSeconds;
-            (currentTimeDifference<-3) ? document.getElementById("priority-one").appendChild(taskDiv) :
-            (currentTimeDifference<5) ? document.getElementById("priority-two").appendChild(taskDiv) :
-            document.getElementById("priority-three").appendChild(taskDiv)
+            let taskPriority = checkDate(taskElement.dueDate);
+            console.log(taskPriority);
+            displayTaskByPriority(taskPriority, taskDiv);
             taskElement.displayed = true;
             localStorage.removeItem("id"+i);
             localStorage.setItem("id"+i, JSON.stringify(taskElement));
         }
     }
+}
+
+function checkDate(taskElementDate) {
+    const msPerDay = (1000*60*60*24);
+    const currentDate = new Date().toISOString().split('T')[0];
+    const currentTimeDifference = (new Date(taskElementDate) - new Date(currentDate))/msPerDay;
+    console.log(currentTimeDifference)
+    return (currentTimeDifference<-3) ? "priority-one" :
+    (currentTimeDifference<5) ? "priority-two" :
+    "priority-three"
+}
+
+
+function displayTaskByPriority(taskPriority, taskDiv) {
+        let priorityList = document.getElementById(taskPriority);
+
+        (taskPriority == "priority-one") ? taskDiv.style.background = "rgb(255 230 230)" :
+        (taskPriority == "priority-two") ? taskDiv.style.background = "rgb(255 244 219)" :
+        taskDiv.style.background = "rgb(222 222 249)";
+
+        priorityList.appendChild(taskDiv);
 }
 
 const todoFactory = function(name, dueDate, description) {

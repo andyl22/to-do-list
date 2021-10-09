@@ -16,37 +16,34 @@ body {
 
 header, main, footer {
     display: flex;
-    width: 100%;
-    background: rgb(65, 65, 65);
+    min-width: 100%;
 }
 
 header {
-    justify-content: center;
-    align-items: center;
-    padding: 30px 0px;
-    color: white;
+    border-bottom: 3px solid rgb(255, 123, 0);
 }
 
-h1 {
-    position: absolute;
-    left: 10px;
-    float: left;
+header h1 {
+    font-size: 24px;
+    padding: 10px 0px 10px 10px;
 }
 
 main {
     justify-content: flex-start;
-    min-height: 60%;
     flex: 1;
-    background: rgb(242, 233, 233);
 }
 
-.button-container {
+.buttons-container {
     display: flex;
     flex-direction: column;
+    width: 200px;
+    align-items: center;
     gap: 20px;
-    padding: 10px;
-    background: white;
-    width: 150px;
+    padding-top: 25px;
+}
+
+.add-todo-button-container {
+    padding-top: 15px;
 }
 
 #add-todo {
@@ -75,40 +72,34 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 33%;
+    width: 33.3%;
     height: 100%;
-    border-top: 1px solid rgb(172, 171, 171);
-    border-left: 1px solid rgb(172, 171, 171);
-    border-bottom: 1px solid rgb(172, 171, 171);
+    border-left: 1px dotted rgb(172, 171, 171);
     overflow: auto;
 }
 
 h2 {
+    text-align: center;
     margin-top: 20px;
-}
-#priority-one {
-}
-
-#priority-two {
-    
-}
-
-#priority-three {
-    border-right: 1px solid rgb(172, 171, 171);
+    padding: 5px;
 }
 
 .task-container {
+    font-size: 18px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
     background: white;
-    padding: 40px;
-    border: 1px solid rgb(211, 211, 211);
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-radius: 40px;
+    padding: 25px;
+    border: 2px solid rgb(55, 32, 32);
+    border-radius: 20px;
+}
+
+#priority-one, #priority-two, #priority-three {
+    display: flex; gap: 30px;
+    flex-wrap: wrap;
+    padding: 20px 20px;
 }
 
 .modal {
@@ -132,6 +123,8 @@ h2 {
     min-width: 320px;
     background: white;
     width: 100%;
+    border-radius: 5px;
+    border: 5px solid rgba(55, 41, 41, 0.8);
 }
 
 .modal-header {
@@ -142,12 +135,11 @@ h2 {
 
 .modal-inputs {
     display: grid;
+    justify-content: center;
     grid-template-columns: 2;
     grid-auto-flow: column;
     grid-gap: 2%;
-    width: 35%;
-    height: 65%;
-    margin-right: 100px;
+    margin-right: 50px;
 }
 
 .close-modal {
@@ -162,9 +154,21 @@ h2 {
     cursor: pointer;
 }
 
+input[type="text"], input[type="date"] {
+    border-radius: 5px;
+    border: 1px solid rgb(131, 129, 129);
+    padding: 8px;
+    height: 10px;
+    width: 180px;
+}
+
 input[type=submit] {
     margin-top: 15px;
     grid-row: 4;
+    border-radius: 5px;
+    border: 1px solid #d1d1d1;
+    height: 25px;
+    width: 70px;
 }
 
 input  {
@@ -172,18 +176,70 @@ input  {
 }
 
 label {
+    font-size: 14px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
 footer {
-    padding: 10px 0px;
+    padding: 4px 0px;
     justify-content: center;
     font-size: 18px;
+    font-weight: bolder;
+    border-top: 1px solid rgb(255, 102, 0);
 }
 
 a {
     text-decoration: none;
-    color: white;
+}
+
+a:hover {
+    cursor: pointer;
+    color: rgb(175, 194, 0);
+}
+
+@media (max-width: 1000px) {
+    main {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .buttons-container {
+        padding: 15px 0px 15px 0px;
+        width: 100%;
+        border-bottom: 2px solid black;
+    }
+
+    .main-content {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .task-list {
+        width: 100%;
+        border: none;
+    }
+
+    #task-list-two, #task-list-three {
+        border-top: 1px dotted black;
+    }
+
+    .task-container {
+        font-size: 18px;
+        border: 2px solid black;
+        padding: 15px;
+    }
+
+    .modal-content {
+        width: 300px;
+        min-width: 300px;
+    }
+
+    .modal-inputs {
+        margin: 0px;
+    }
+    footer {
+        visibility: hidden;
+    }
 }
