@@ -21,16 +21,25 @@ header, main, footer {
 
 header {
     align-items: center;
+    justify-content: center;
     border-bottom: 10px solid rgb(255, 123, 0);
+    padding: 0px 0px 2px 0px;
+}
+
+#toggle-sidenav {
+    font-size: 26px;
+    position: absolute;
+    left: 0px;
 }
 
 #toggle-sidenav:hover {
     cursor: pointer;
+    background: rgb(216, 216, 216);
 }
 
 header h1 {
     font-size: 24px;
-    padding: 10px 0px 10px 10px;
+    padding: 15px;
 }
 
 main {
@@ -119,15 +128,15 @@ h2 {
 }
 
 .task-container {
-    font-size: 18px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-height: 200px;
+    max-width: 340px;
+    font-size: 18px;
     background: white;
     padding: 25px;
-    border: 2px solid rgb(55, 32, 32);
     border-radius: 20px;
+    word-wrap: break-word;
 }
 
 #priority-one, #priority-two, #priority-three {
@@ -180,15 +189,15 @@ h2 {
     margin-right: 50px;
 }
 
-.close-modal {
+#close-modal {
     float: right;
     position: relative;
     top: -30px;
     left: -5px;
-    font-size: 15px;
+    font-size: 24px;
 }
 
-.close-modal:hover {
+#close-modal:hover {
     cursor: pointer;
 }
 
@@ -254,7 +263,6 @@ footer a:hover {
 
     .task-container {
         font-size: 18px;
-        border: 2px solid black;
         padding: 15px;
     }
 
