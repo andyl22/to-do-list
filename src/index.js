@@ -15,10 +15,10 @@ function init() {
 
 function addToDo() {
     enableModalWindow();
-    if(!document.getElementsByClassName("modal-input")[0]) {
+    if (!document.getElementsByClassName("modal-input")[0]) {
         setUpModalContent();
     }
-        
+
 
     function enableModalWindow() {
         setModalVisibility("visible");
@@ -35,12 +35,12 @@ function addToDo() {
     }
 
     function addModalListeners() {
-        window.addEventListener("click", function (e) {(e.target.id == "modal") ? disableModal() : null;});
+        window.addEventListener("click", function (e) { (e.target.id == "modal") ? disableModal() : null; });
         document.getElementById("close-modal").addEventListener("click", disableModal);
     }
 
     function removeModalListeners() {
-        window.removeEventListener("click", function (e) {(e.target.id == "modal") ? disableModal() : null;});
+        window.removeEventListener("click", function (e) { (e.target.id == "modal") ? disableModal() : null; });
         document.getElementById("close-modal").removeEventListener("click", disableModal);
     }
 
@@ -58,7 +58,7 @@ function addToDo() {
     function setupInputs() {
         const modal = document.getElementById("modal-content");
         const form = createInputForm(modal);
-        appendInputsToForm([["Name","text"], ["Date", "date"], ["Description", "text"]], form);
+        appendInputsToForm([["Name", "text"], ["Date", "date"], ["Description", "text"]], form);
         appendSubmitToForm(form)
     }
 
@@ -105,32 +105,28 @@ function addToDo() {
         e.preventDefault();
         let [name, duedate, description] = getInputValues();
         let taskElement = todoFactory(name, duedate, description);
-        localStorage.setItem("id"+localStorage.length, JSON.stringify(taskElement));
+        localStorage.setItem("id" + localStorage.length, JSON.stringify(taskElement));
         displayTasks();
         cleanInputs();
     }
 
     function getInputValues() {
         let name = document.getElementById("name").value;
-        console.log(name);
         let date = document.getElementById("date").value;
-        console.log(date);
         let description = document.getElementById("description").value;
-        console.log(description);
         return [name, date, description];
     }
 
     function cleanInputs() {
         document.getElementById("name").value = "";
-        document.getElementById("date").value  = "";
-        document.getElementById("description").value  = "";
+        document.getElementById("date").value = "";
+        document.getElementById("description").value = "";
     }
 }
 
-function displayTasks(bypass=false) {
-    for (let i=0; i<localStorage.length; i++) {
-        let taskElement = JSON.parse(localStorage.getItem("id"+i));
-        console.log(taskElement);
+function displayTasks(bypass = false) {
+    for (let i = 0; i < localStorage.length; i++) {
+        let taskElement = JSON.parse(localStorage.getItem("id" + i));
         if (taskElement.displayed == false || bypass == true) {
             let taskDiv = document.createElement("div");
             taskDiv.className = "task-container";
@@ -144,37 +140,39 @@ function displayTasks(bypass=false) {
             taskDiv.appendChild(dueDate);
             taskDiv.appendChild(description);
             let taskPriority = checkDate(taskElement.dueDate);
-            console.log(taskPriority);
             displayTaskByPriority(taskPriority, taskDiv);
             taskElement.displayed = true;
-            localStorage.removeItem("id"+i);
-            localStorage.setItem("id"+i, JSON.stringify(taskElement));
+            localStorage.removeItem("id" + i);
+            localStorage.setItem("id" + i, JSON.stringify(taskElement));
         }
     }
 }
 
 function checkDate(taskElementDate) {
-    const msPerDay = (1000*60*60*24);
+    const msPerDay = (1000 * 60 * 60 * 24);
     const currentDate = new Date().toISOString().split('T')[0];
-    const currentTimeDifference = (new Date(taskElementDate) - new Date(currentDate))/msPerDay;
-    console.log(currentTimeDifference)
-    return (currentTimeDifference<-3) ? "priority-one" :
-    (currentTimeDifference<5) ? "priority-two" :
-    "priority-three"
+    const currentTimeDifference = (new Date(taskElementDate) - new Date(currentDate)) / msPerDay;
+    return (currentTimeDifference < -3) ? "priority-one" :
+        (currentTimeDifference < 5) ? "priority-two" :
+            "priority-three"
 }
 
 
 function displayTaskByPriority(taskPriority, taskDiv) {
-        let priorityList = document.getElementById(taskPriority);
+    let priorityList = document.getElementById(taskPriority);
 
-        (taskPriority == "priority-one") ? taskDiv.style.background = "rgb(255 230 230)" :
+    (taskPriority == "priority-one") ? taskDiv.style.background = "rgb(255 230 230)" :
         (taskPriority == "priority-two") ? taskDiv.style.background = "rgb(255 244 219)" :
-        taskDiv.style.background = "rgb(222 222 249)";
+            taskDiv.style.background = "rgb(222 222 249)";
 
-        priorityList.appendChild(taskDiv);
+    priorityList.appendChild(taskDiv);
 }
 
-const todoFactory = function(name, dueDate, description) {
+function iconBar() {
+}
+
+
+const todoFactory = function (name, dueDate, description) {
     let task = {};
     task.name = name;
     task.dueDate = dueDate;
@@ -186,3 +184,55 @@ const todoFactory = function(name, dueDate, description) {
 }
 
 init();
+document.getElementById("add-todo").addEventListener("mouseover", growBar);
+document.getElementById("add-todo").addEventListener("mouseout", shrinkBar);
+
+function growBar() {
+    growAnimation();
+    // animateBar.onfinish = function() {
+    //     document.getElementById("add-todo").innerText = "+ Add Task"
+    //     document.getElementById("add-todo").animate([
+    //         { transform: 'translateX(14px)', opacity: '0.3' },
+    //         { transform: 'translateX(9px)', opacity: '0.5' },
+    //         { transform: 'translateX(4px)',  opacity: '0.7' },
+    //         { transform: 'translateX(1px)', opacity: '0.9'},   
+    //         { transform: 'translateX(0px)', opacity: '1' }
+    //     ], {
+    //         duration: 1000
+    //     })
+    // }
+}
+
+function shrinkBar() {
+    shrinkAnimation();
+}
+
+const growAnimation = function () {
+    document.getElementById("icon-bar").animate([
+        { width: '50px' },
+        { width: '150px' }
+    ], {
+        duration: 50,
+        fill: "forwards"
+    })
+
+    document.getElementById("add-todo").textContent = "+ Add Task";
+    document.getElementById("add-todo").animate({
+        opacity: [0, 1]
+    },
+        {
+            duration: 100
+        })
+
+}
+
+const shrinkAnimation = function () {
+    document.getElementById("add-todo").textContent = "+";
+    document.getElementById("icon-bar").animate([
+        { width: '150px' },
+        { width: '50px' }
+    ], {
+        duration: 50,
+        fill: "forwards"
+    })
+}

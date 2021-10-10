@@ -33,31 +33,21 @@ main {
     flex: 1;
 }
 
-.buttons-container {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    align-items: center;
-    gap: 20px;
-    padding-top: 25px;
-}
-
-.add-todo-button-container {
-    padding-top: 15px;
-}
-
 #add-todo {
-    height: 50px;
-    width: 100px;
+    display: flex;
+    font-size: 15px;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px 10px;
     border: none;
-    background: rgb(187, 138, 46);
     color: white;
+    background: rgb(36, 0, 197);
 }
 
 #add-todo:hover {
     cursor: pointer;
     transform: scale(1.01);
-    background: rgb(157, 114, 34);
+    background: rgb(25, 0, 136);
 }
 
 .main-content {
@@ -100,6 +90,10 @@ h2 {
     display: flex; gap: 30px;
     flex-wrap: wrap;
     padding: 20px 20px;
+}
+
+#task-list-one {
+    border: none;
 }
 
 .modal {
@@ -199,16 +193,15 @@ a:hover {
     color: rgb(175, 194, 0);
 }
 
+.icon-bar {
+    background: rgb(189, 178, 238);
+    width: 50px;
+}
+
 @media (max-width: 1000px) {
     main {
         align-items: center;
         flex-direction: column;
-    }
-
-    .buttons-container {
-        padding: 15px 0px 15px 0px;
-        width: 100%;
-        border-bottom: 2px solid black;
     }
 
     .main-content {
