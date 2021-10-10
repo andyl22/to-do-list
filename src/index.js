@@ -1,4 +1,8 @@
 import "./index.css"
+import '@fortawesome/fontawesome-free/js/fontawesome'
+import '@fortawesome/fontawesome-free/js/solid'
+import '@fortawesome/fontawesome-free/js/regular'
+import '@fortawesome/fontawesome-free/js/brands'
 
 if (process.env.NODE_ENV == 'production') {
     console.log('Production mode!');
@@ -18,7 +22,6 @@ function addToDo() {
     if (!document.getElementsByClassName("modal-input")[0]) {
         setUpModalContent();
     }
-
 
     function enableModalWindow() {
         setModalVisibility("visible");
@@ -168,10 +171,6 @@ function displayTaskByPriority(taskPriority, taskDiv) {
     priorityList.appendChild(taskDiv);
 }
 
-function iconBar() {
-}
-
-
 const todoFactory = function (name, dueDate, description) {
     let task = {};
     task.name = name;
@@ -183,56 +182,51 @@ const todoFactory = function (name, dueDate, description) {
     return task;
 }
 
-init();
-document.getElementById("add-todo").addEventListener("mouseover", growBar);
-document.getElementById("add-todo").addEventListener("mouseout", shrinkBar);
-
-function growBar() {
-    growAnimation();
-    // animateBar.onfinish = function() {
-    //     document.getElementById("add-todo").innerText = "+ Add Task"
-    //     document.getElementById("add-todo").animate([
-    //         { transform: 'translateX(14px)', opacity: '0.3' },
-    //         { transform: 'translateX(9px)', opacity: '0.5' },
-    //         { transform: 'translateX(4px)',  opacity: '0.7' },
-    //         { transform: 'translateX(1px)', opacity: '0.9'},   
-    //         { transform: 'translateX(0px)', opacity: '1' }
-    //     ], {
-    //         duration: 1000
-    //     })
-    // }
-}
-
-function shrinkBar() {
-    shrinkAnimation();
+function toggleList() {
+    console.log("test")
+    let navBar = document.getElementById("nav-bar");
+    if (navBar.style.display == "" || navBar.style.display == "none") {
+        document.getElementById("nav-bar").style.display = "flex";
+        growAnimation();
+    } else {
+        shrinkAnimation();
+    }
 }
 
 const growAnimation = function () {
-    document.getElementById("icon-bar").animate([
-        { width: '50px' },
-        { width: '150px' }
-    ], {
-        duration: 50,
-        fill: "forwards"
-    })
-
-    document.getElementById("add-todo").textContent = "+ Add Task";
-    document.getElementById("add-todo").animate({
-        opacity: [0, 1]
-    },
+    document.getElementById("nav-bar").animate(
+        { opacity: [0, 0.3, 1] },
         {
-            duration: 100
+            duration: 150
         })
 
 }
 
 const shrinkAnimation = function () {
-    document.getElementById("add-todo").textContent = "+";
-    document.getElementById("icon-bar").animate([
-        { width: '150px' },
-        { width: '50px' }
-    ], {
-        duration: 50,
-        fill: "forwards"
-    })
+    document.getElementById("nav-bar").animate(
+        { opacity: [1, 0.3, 0] }
+        , {
+            duration: 150,
+        }).onfinish = () => document.getElementById("nav-bar").style.display = "none";
 }
+
+function projectDropdown() {
+    const dropdownContainer = document.querySelector(".projects-container");
+    const projectsListContainer = document.querySelector(".projects-list-container");
+    if (dropdownContainer.style.display == "" || dropdownContainer.style.display == "none") {
+        dropdownContainer.style.display = "flex";
+        document.querySelectorAll(".projects-list-container button").forEach(button => {
+            button.classList.add("active");
+        })
+    } else {
+        dropdownContainer.style.display = "none";
+        projectsListContainer.classList.remove("active");
+        document.querySelectorAll(".projects-list-container button").forEach(button => {
+            button.classList.remove("active");
+        })
+    }
+}
+
+init();
+document.querySelector(".projects-list-btn").addEventListener("click", projectDropdown);
+document.getElementById("toggle-sidenav").addEventListener("click", toggleList);

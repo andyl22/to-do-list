@@ -20,7 +20,12 @@ header, main, footer {
 }
 
 header {
-    border-bottom: 3px solid rgb(255, 123, 0);
+    align-items: center;
+    border-bottom: 10px solid rgb(255, 123, 0);
+}
+
+#toggle-sidenav:hover {
+    cursor: pointer;
 }
 
 header h1 {
@@ -33,18 +38,57 @@ main {
     flex: 1;
 }
 
-#add-todo {
-    display: flex;
-    font-size: 15px;
-    font-weight: bold;
-    width: 100%;
-    padding: 10px 10px;
-    border: none;
-    color: white;
-    background: rgb(36, 0, 197);
+.nav-bar {
+    display: none;
+    flex-direction: column;
+    background: rgb(95, 64, 182);
+    height: fit-content;
+    width: 150px;
 }
 
-#add-todo:hover {
+
+.projects-list-btn {
+    display: flex;
+    gap: 10px;
+}
+
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    display: none;
+}
+
+.projects-container p {
+    width: 100%;
+    text-align: left;
+}
+
+.sub-project-btn {
+    padding-left: 30px;
+    font-size: 12px;
+}
+
+.active {
+    background: rgb(81, 60, 175);
+}
+
+button {
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 13px;
+    font-weight: bold;
+    width: 100%;
+    padding: 5px 10px;
+    border: none;
+    color: white;
+    background: rgb(105, 82, 209);
+}
+
+button:hover, .projects-container p:hover {
     cursor: pointer;
     transform: scale(1.01);
     background: rgb(25, 0, 136);
@@ -139,7 +183,7 @@ h2 {
 .close-modal {
     float: right;
     position: relative;
-    top: -25px;
+    top: -30px;
     left: -5px;
     font-size: 15px;
 }
@@ -184,25 +228,15 @@ footer {
     border-top: 1px solid rgb(255, 102, 0);
 }
 
-a {
+footer a {
     text-decoration: none;
 }
 
-a:hover {
+footer a:hover {
     cursor: pointer;
     color: rgb(175, 194, 0);
 }
-
-.icon-bar {
-    background: rgb(189, 178, 238);
-    width: 50px;
-}
-
 @media (max-width: 1000px) {
-    main {
-        align-items: center;
-        flex-direction: column;
-    }
 
     .main-content {
         flex-direction: column;
@@ -233,6 +267,6 @@ a:hover {
         margin: 0px;
     }
     footer {
-        visibility: hidden;
+        display: none;
     }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script src="main.js" defer></script>
     <meta charset="UTF-8">
@@ -7,28 +8,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
 </head>
+
 <body>
     <header>
-        <h1>📓 To-Do List</h1>
+        <h1 id="toggle-sidenav"><i class="fa fa-list" aria-hidden="true"></i></h1>
+        <h1>To-Do List</h1>
     </header>
     <main>
-        <div class="icon-bar" id="icon-bar">
-            <button id="add-todo">+</button>
+        <div class="nav-bar" id="nav-bar">
+            <div class="projects-list-container">
+                <button class="projects-list-btn">Default Project
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="projects-container">
+                    <button id="project1" class="sub-project-btn">Default</button>
+                    <button id="new-project-btn" class="sub-project-btn">New Project</button>
+                </div>
+            </div>
+            <button id="add-todo">Add Task To Current Project</button>
         </div>
         <div class="main-content">
             <div class="task-list" id="task-list-one">
                 <h2>Overdue</h2>
-                <div id = "priority-one">
+                <div id="priority-one">
                 </div>
             </div>
             <div class="task-list" id="task-list-two">
-                <h2>< 5 Days</h2>
-                <div id = "priority-two">
-                </div>     
+                <h2>
+                    < 5 Days</h2>
+                        <div id="priority-two">
+                        </div>
             </div>
             <div class="task-list" id="task-list-three">
                 <h2>> 5 Days</h2>
-                <div id = "priority-three">
+                <div id="priority-three">
                 </div>
             </div>
         </div>
@@ -39,10 +52,11 @@
 </body>
 <div class="modal" id="modal">
     <div class="main-content modal-content" id="modal-content">
-        <div class = "modal-header" id="modal-header">
-            <h3 class= "modal-title" id="modal-title">Placeholder</h3>
+        <div class="modal-header" id="modal-header">
+            <h3 class="modal-title" id="modal-title"></h3>
             <p class="close-modal" id="close-modal">✖</p>
         </div>
     </div>
 </div>
+
 </html>
