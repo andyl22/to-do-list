@@ -25,6 +25,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "css-loader": "^6.3.0",
+    "moment": "^2.29.1",
     "style-loader": "^3.3.0"
   }
 }

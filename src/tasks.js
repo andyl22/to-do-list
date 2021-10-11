@@ -1,5 +1,6 @@
 import { setUpModalTemplate } from "./modal.js";
 import { activeProject } from "./project.js";
+import moment from "moment";
 
 function displayTasks(refreshPageBypass = false) {
     const taskList = activeProject.tasks
@@ -15,19 +16,33 @@ function displayTasks(refreshPageBypass = false) {
         }
 
     function taskController(task) {
-            let taskDiv = document.createElement("div");
-            taskDiv.className = "task-container";
-            let name = document.createElement("h3");
-            let dueDate = document.createElement("p");
-            let description = document.createElement("p");
-            name.textContent = task.name;
-            dueDate.textContent = task.dueDate;
-            description.textContent = task.name;
-            taskDiv.appendChild(name);
-            taskDiv.appendChild(dueDate);
-            taskDiv.appendChild(description);
-            let taskPriority = calculateTaskPriority(task.dueDate);
-            displayTaskByPriority(taskPriority, taskDiv);
+        let taskDiv = createTaskElements(task);
+        let taskPriority = calculateTaskPriority(task.dueDate);
+        displayTaskByPriority(taskPriority, taskDiv);
+    }
+
+    function createTaskElements(task) {
+        const taskDiv = document.createElement("div");
+        const summaryInfo = document.createElement("div");
+        const additionalInfoContainer = document.createElement("div");
+        taskDiv.className = "task-container";
+        summaryInfo.className = "summary-info-container"
+        additionalInfoContainer.className = "additional-info-container"
+        const name = document.createElement("p");
+        const dueDate = document.createElement("p");
+        const description = document.createElement("p");
+        const dropDownArrow = document.createElement("i")
+        dropDownArrow.className = "fa fa-caret-down";
+        name.textContent = task.name + " ";
+        dueDate.textContent = moment(task.dueDate).format("MMM Do YY"); ;
+        description.textContent = task.name;
+        name.append(dropDownArrow);
+        summaryInfo.appendChild(dueDate);
+        summaryInfo.appendChild(name);
+        additionalInfoContainer.appendChild(description);
+        taskDiv.appendChild(summaryInfo);
+        taskDiv.appendChild(additionalInfoContainer);
+        return taskDiv;
     }
 
     function calculateTaskPriority(taskElementDate) {
@@ -41,10 +56,9 @@ function displayTasks(refreshPageBypass = false) {
 
     function displayTaskByPriority(taskPriority, taskDiv) {
         let priorityList = document.getElementById(taskPriority);
-
-        (taskPriority == "priority-one") ? taskDiv.style.background = "rgb(255 230 230)" :
-            (taskPriority == "priority-two") ? taskDiv.style.background = "rgb(255 244 219)" :
-                taskDiv.style.background = "rgb(222 222 249)";
+        (taskPriority == "priority-one") ? taskDiv.childNodes[0].style.background = "rgb(255 230 230)" :
+            (taskPriority == "priority-two") ? taskDiv.childNodes[0].style.background = "rgb(255 244 219)" :
+            taskDiv.childNodes[0].style.background = "rgb(222 222 249)";
 
         priorityList.appendChild(taskDiv);
     }

@@ -82,6 +82,8 @@ main {
 
 #new-project-input {
     width: 100px;
+    height: 15px;
+    padding: 2px 0px;
 }
 
 .sub-project-btn {
@@ -144,17 +146,37 @@ h2 {
 .task-container {
     display: flex;
     flex-direction: column;
-    max-height: 200px;
-    max-width: 280px;
+    border: 1px solid rgb(232, 232, 232);
+    justify-content: space-evenly;
+    width: 100%;
     font-size: 18px;
     background: white;
-    padding: 25px;
-    border-radius: 20px;
+    border-radius: 4px;
     word-wrap: break-word;
 }
 
+.summary-info-container {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid rgb(184, 184, 184);
+    padding: 5px 15px;
+}
+
+.additional-info-container {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid rgb(184, 184, 184);
+    padding: 15px;
+}
+
+.task-container:hover {
+    box-shadow: -2px 2px 5px 0px gray;
+}
+
 #priority-one, #priority-two, #priority-three {
-    display: flex; gap: 30px;
+    display: flex; 
+    gap: 10px;
+    width: 95%;
     flex-wrap: wrap;
     padding: 20px 20px;
 }
@@ -265,11 +287,6 @@ label {
 
     #task-list-two, #task-list-three {
         border-top: 1px dotted black;
-    }
-
-    .task-container {
-        font-size: 18px;
-        padding: 15px;
     }
 
     .modal-content {

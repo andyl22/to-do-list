@@ -136,7 +136,7 @@ function displayProjects() {
 }
 
 function changePageHeaderToProject() {
-    document.getElementById("page-header").textContent = activeProject.name;
+    document.getElementById("page-header").textContent = activeProject.name + " Project";
 }
 
 let activeProject = undefined;
