@@ -146,19 +146,18 @@ h2 {
 .task-container {
     display: flex;
     flex-direction: column;
-    border: 1px solid rgb(232, 232, 232);
-    justify-content: space-evenly;
-    width: 100%;
-    font-size: 18px;
-    background: white;
-    border-radius: 4px;
+    border: none;
+    width: 90%;
     word-wrap: break-word;
+    border-radius: 10px;
 }
 
 .summary-info-container {
     display: flex;
     justify-content: space-between;
-    border: 1px solid rgb(184, 184, 184);
+    border: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     padding: 5px 15px;
 }
 
@@ -176,8 +175,10 @@ h2 {
 .additional-info-container {
     display: none;
     justify-content: space-between;
-    border: 1px solid rgb(184, 184, 184);
     padding: 15px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid rgb(237, 237, 237);
 }
 
 .task-name-dropdown {
@@ -187,7 +188,7 @@ h2 {
 }
 
 .task-container:hover {
-    box-shadow: -2px 2px 5px 0px gray;
+    box-shadow: -5px 5px 5px 0px gray;
 }
 
 #priority-one, #priority-two, #priority-three {
