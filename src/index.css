@@ -26,7 +26,7 @@ header, main, footer {
 header {
     align-items: center;
     justify-content: center;
-    border-bottom: 10px solid rgb(255, 123, 0);
+    border-bottom: 10px solid rgb(255, 185, 93);
     padding: 0px 0px 2px 0px;
 }
 
@@ -55,15 +55,20 @@ main {
     display: none;
     position: fixed;
     flex-direction: column;
-    background: rgb(95, 64, 182);
-    height: fit-content;
+    background: rgb(255, 243, 219);
+    height: min-content;
     width: 150px;
+    gap: 2px;
 }
 
+.projects-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
 
 .projects-list-btn {
     display: flex;
-    gap: 10px;
 }
 
 .projects-container {
@@ -71,13 +76,8 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: white;
     display: none;
-}
-
-.projects-container p {
-    width: 100%;
-    text-align: left;
+    gap: 1px;
 }
 
 #new-project-input {
@@ -85,15 +85,19 @@ main {
 }
 
 .sub-project-btn {
-    padding-left: 20px;
+    padding-left: 30px;
+    border: none;
 }
 
 .active {
-    background: rgb(81, 60, 175);
+    background: rgb(255, 248, 234);
 }
 
 button {
-    display: flex;
+    color: black;
+    background: rgb(255, 249, 237);
+    display: block;
+    word-wrap: break-word;
     justify-content: flex-start;
     text-align: left;
     font-size: 13px;
@@ -101,14 +105,16 @@ button {
     width: 100%;
     padding: 5px 10px;
     border: none;
-    color: white;
-    background: rgb(105, 82, 209);
 }
 
 button:hover, .projects-container p:hover {
     cursor: pointer;
     transform: scale(1.01);
-    background: rgb(25, 0, 136);
+    background: rgb(255, 243, 219);
+}
+
+button:focus {
+    outline: none;
 }
 
 .main-content {
@@ -178,8 +184,8 @@ h2 {
     min-width: 320px;
     background: white;
     width: 100%;
-    border-radius: 5px;
-    border: 5px solid rgba(55, 41, 41, 0.8);
+    border-radius: 15px;
+    border: 1px solid wheat;
 }
 
 .modal-header {
@@ -201,7 +207,7 @@ h2 {
     float: right;
     position: relative;
     top: -30px;
-    left: -5px;
+    left: -10px;
     font-size: 24px;
 }
 
@@ -226,6 +232,14 @@ input[type=submit] {
     width: 70px;
 }
 
+input[type="date"]:hover {
+    cursor: text;
+}
+
+input[type=submit]:hover {
+    cursor: pointer;
+}
+
 input  {
     grid-column: 2;
 }
@@ -237,22 +251,6 @@ label {
     align-items: center;
 }
 
-footer {
-    padding: 4px 0px;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: bolder;
-    border-top: 1px solid rgb(255, 102, 0);
-}
-
-footer a {
-    text-decoration: none;
-}
-
-footer a:hover {
-    cursor: pointer;
-    color: rgb(175, 194, 0);
-}
 @media (max-width: 1000px) {
 
     .main-content {
