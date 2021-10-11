@@ -1,6 +1,7 @@
 import { initializeTasks } from "./tasks";
 
 function initializeNewProjectInputs() {
+    if (!document.querySelector(".new-project-form"))
     createProjectInput();
     newProjectCreateListener();
 }

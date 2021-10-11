@@ -36,12 +36,15 @@ function initializeTasks(refreshPageBypass = false) {
         const dueDate = document.createElement("p");
         const description = document.createElement("p");
         const dropDownArrow = document.createElement("i")
+        const summaryPriorityIndicator = document.createElement("div");
+        summaryPriorityIndicator.className = "priority-color-indicator";
         name.className = "task-name";
         dropDownArrow.className = "task-name-dropdown";
         dropDownArrow.textContent = "▼";
         name.textContent = task.name + " ";
         dueDate.textContent = moment(task.dueDate).format("MMM Do YY"); ;
         description.textContent = task.description;
+        summaryInfo.appendChild(summaryPriorityIndicator);
         summaryInfo.appendChild(dueDate);
         summaryInfo.appendChild(name);
         summaryInfo.append(dropDownArrow);
@@ -62,9 +65,9 @@ function initializeTasks(refreshPageBypass = false) {
 
     function displayTaskByPriority(taskPriority, taskDiv) {
         let priorityList = document.getElementById(taskPriority);
-        (taskPriority == "priority-one") ? taskDiv.childNodes[0].style.background = "rgb(255 230 230)" :
-            (taskPriority == "priority-two") ? taskDiv.childNodes[0].style.background = "rgb(255 244 219)" :
-            taskDiv.childNodes[0].style.background = "rgb(222 222 249)";
+        (taskPriority == "priority-one") ? taskDiv.childNodes[0].childNodes[0].style.background = "rgb(241 93 93)" :
+            (taskPriority == "priority-two") ? taskDiv.childNodes[0].childNodes[0].style.background = "rgb(255 158 76)" :
+            taskDiv.childNodes[0].childNodes[0].style.background = "rgb(112 112 253)";
 
         priorityList.appendChild(taskDiv);
     }
