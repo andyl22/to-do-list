@@ -105,7 +105,7 @@ function addProjectNavListener() {
 
 function initalizeProjects() {
     if (localStorage.length == 0) {
-        localStorage.setItem("projectID-0", JSON.stringify(createNewProject("Default")));
+        localStorage.setItem("projectID-0", JSON.stringify(createNewProject("My First Project")));
         activeProject = JSON.parse(localStorage.getItem("projectID-0"));
     } else if (localStorage.length == 1) {
         activeProject = JSON.parse(localStorage.getItem("projectID-0"));
@@ -136,7 +136,7 @@ function displayProjects() {
 }
 
 function changePageHeaderToProject() {
-    document.getElementById("page-header").textContent = activeProject.name + " Project";
+    document.getElementById("page-header").textContent = activeProject.name + " Tasks";
 }
 
 let activeProject = undefined;
