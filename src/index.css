@@ -26,7 +26,7 @@ header, main, footer {
 header {
     align-items: center;
     justify-content: center;
-    border-bottom: 10px solid rgb(255, 185, 93);
+    border-bottom: 10px solid rgb(255, 123, 0);
     padding: 0px 0px 2px 0px;
 }
 
@@ -90,12 +90,12 @@ main {
 }
 
 .active {
-    background: rgb(255, 248, 234);
+    background: rgb(255, 230, 179);
 }
 
 button {
     color: black;
-    background: rgb(255, 249, 237);
+    background: rgb(255, 240, 204);
     display: block;
     word-wrap: break-word;
     justify-content: flex-start;

@@ -34,7 +34,7 @@ function displayTasks(refreshPageBypass = false) {
         const msPerDay = (1000 * 60 * 60 * 24);
         const currentDate = new Date().toISOString().split('T')[0];
         const currentTimeDifference = (new Date(taskElementDate) - new Date(currentDate)) / msPerDay;
-        return (currentTimeDifference < -3) ? "priority-one" :
+        return (currentTimeDifference < -1) ? "priority-one" :
             (currentTimeDifference < 5) ? "priority-two" :
                 "priority-three"
     }
