@@ -99,7 +99,8 @@ function addTasksController() {
 function setupAddInputs() {
     const modal = document.getElementById("modal-content");
     const form = createInputForm(modal);
-    appendInputsToForm([["Name", "text"], ["Date", "date"], ["Description", "text"]], form);
+    appendInputsToForm([["Name", "text"], ["Date", "date"]], form);
+    createTextArea().forEach(element => form.appendChild(element));
     appendSubmitToForm(form)
 
     function createInputForm(modal) {
@@ -107,6 +108,15 @@ function setupAddInputs() {
         inputsContainer.className = "modal-inputs"
         modal.appendChild(inputsContainer);
         return inputsContainer;
+    }
+
+    function createTextArea() {
+        const textArea = document.createElement("textarea");
+        const textAreaLabel = document.createElement("label");
+        textArea.id = "description";
+        textAreaLabel.textContent = "Description"
+        textAreaLabel.setAttribute("for", "description");
+        return [textArea, textAreaLabel];
     }
 
     function appendInputsToForm(inputList, inputsContainer) {
