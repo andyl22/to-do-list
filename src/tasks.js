@@ -41,7 +41,7 @@ function initializeTasks(refreshPageBypass = false) {
         dropDownArrow.textContent = "▼";
         name.textContent = task.name + " ";
         dueDate.textContent = moment(task.dueDate).format("MMM Do YY"); ;
-        description.textContent = task.name;
+        description.textContent = task.description;
         summaryInfo.appendChild(dueDate);
         summaryInfo.appendChild(name);
         summaryInfo.append(dropDownArrow);
@@ -116,6 +116,7 @@ function setupAddInputs() {
         textArea.id = "description";
         textAreaLabel.textContent = "Description"
         textAreaLabel.setAttribute("for", "description");
+        textArea.setAttribute("required", true);
         return [textArea, textAreaLabel];
     }
 
@@ -153,14 +154,16 @@ function setupAddInputs() {
 }
 
 function modalSubmitListener() {
-    const submit = document.getElementById("submit-modal");
-    submit.addEventListener("click", addInputsHandler);
+    const form = document.querySelector(".modal-inputs");
+    form.addEventListener("submit", addInputsHandler);
 }
 
 function addInputsHandler(e) {
+    console.log(e);
     e.preventDefault();
     let [name, duedate, description] = getInputValues();
     let taskElement = taskFactory(name, duedate, description);
+    console.log(taskElement)
     storeTask(taskElement);
     initializeTasks();
     cleanInputs();
