@@ -1,26 +1,33 @@
-import {setUpModalTemplate} from "./modal.js";
+import { setUpModalTemplate } from "./modal.js";
+import { activeProject } from "./project.js";
 
 function displayTasks(refreshPageBypass = false) {
-    for (let i = 0; i < localStorage.length; i++) {
-        let taskElement = JSON.parse(localStorage.getItem("id" + i));
-        if (taskElement.displayed == false || refreshPageBypass == true) {
+    const taskList = activeProject.tasks
+
+    if (taskList != []) {
+        if (refreshPageBypass == true) {
+            if (taskList) {
+                taskList.forEach(task => taskController(task));}
+            } else {
+                let task = taskList[taskList.length-1];
+                taskController(task);
+            }
+        }
+
+    function taskController(task) {
             let taskDiv = document.createElement("div");
             taskDiv.className = "task-container";
             let name = document.createElement("h3");
             let dueDate = document.createElement("p");
             let description = document.createElement("p");
-            name.textContent = taskElement.name;
-            dueDate.textContent = taskElement.dueDate;
-            description.textContent = taskElement.name;
+            name.textContent = task.name;
+            dueDate.textContent = task.dueDate;
+            description.textContent = task.name;
             taskDiv.appendChild(name);
             taskDiv.appendChild(dueDate);
             taskDiv.appendChild(description);
-            let taskPriority = calculateTaskPriority(taskElement.dueDate);
+            let taskPriority = calculateTaskPriority(task.dueDate);
             displayTaskByPriority(taskPriority, taskDiv);
-            taskElement.displayed = true;
-            localStorage.removeItem("id" + i);
-            localStorage.setItem("id" + i, JSON.stringify(taskElement));
-        }
     }
 
     function calculateTaskPriority(taskElementDate) {
@@ -34,13 +41,16 @@ function displayTasks(refreshPageBypass = false) {
 
     function displayTaskByPriority(taskPriority, taskDiv) {
         let priorityList = document.getElementById(taskPriority);
-    
+
         (taskPriority == "priority-one") ? taskDiv.style.background = "rgb(255 230 230)" :
             (taskPriority == "priority-two") ? taskDiv.style.background = "rgb(255 244 219)" :
                 taskDiv.style.background = "rgb(222 222 249)";
-    
+
         priorityList.appendChild(taskDiv);
     }
+}
+function addTask(task) {
+    activeProject.tasks.push(task);
 }
 
 function addTasksController() {
@@ -104,7 +114,7 @@ function addInputsHandler(e) {
     e.preventDefault();
     let [name, duedate, description] = getInputValues();
     let taskElement = taskFactory(name, duedate, description);
-    localStorage.setItem("id" + localStorage.length, JSON.stringify(taskElement));
+    storeTask(taskElement);
     displayTasks();
     cleanInputs();
 
@@ -120,6 +130,11 @@ function addInputsHandler(e) {
         document.getElementById("date").value = "";
         document.getElementById("description").value = "";
     }
+
+    function storeTask(taskElement) {
+        addTask(taskElement);
+        localStorage.setItem(activeProject.id, JSON.stringify(activeProject));
+    }
 }
 
 const taskFactory = function (name, dueDate, description) {
@@ -127,10 +142,9 @@ const taskFactory = function (name, dueDate, description) {
     task.name = name;
     task.dueDate = dueDate;
     task.description = description;
-    task.displayed = false;
     task.createdDate = new Date(Date.now()).toString();
 
     return task;
 }
 
-export {displayTasks, addTasksController};
+export { displayTasks, addTasksController };

@@ -1,3 +1,7 @@
+*:focus {
+    outline: 1px solid rgb(119, 99, 136);
+}
+
 * {
     margin:0;
     padding:0;
@@ -75,9 +79,12 @@ main {
     text-align: left;
 }
 
+#new-project-input {
+    width: 100px;
+}
+
 .sub-project-btn {
-    padding-left: 30px;
-    font-size: 12px;
+    padding-left: 20px;
 }
 
 .active {
@@ -131,7 +138,7 @@ h2 {
     display: flex;
     flex-direction: column;
     max-height: 200px;
-    max-width: 340px;
+    max-width: 280px;
     font-size: 18px;
     background: white;
     padding: 25px;

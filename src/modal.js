@@ -26,8 +26,8 @@ function setUpModalTemplate(modalTitle) {
         document.getElementById("close-modal").removeEventListener("click", disableModal);
         const modalContent = document.getElementById("modal-content");
         let formElements = modalContent.getElementsByTagName("form");
-        while (formElements[0]) {modalContent.removeChild(formElements[0])};
+        while (formElements[0]) { modalContent.removeChild(formElements[0]) };
     }
 }
 
-export {setUpModalTemplate};
+export { setUpModalTemplate };
