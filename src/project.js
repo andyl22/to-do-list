@@ -1,4 +1,4 @@
-import { displayTasks } from "./tasks";
+import { initializeTasks } from "./tasks";
 
 function initializeNewProjectInputs() {
     createProjectInput();
@@ -87,7 +87,7 @@ function swapActiveProjects(project) {
     changePageHeaderToProject();
     const taskElements = document.querySelectorAll(".task-container");
     taskElements.forEach(element => element.remove());
-    displayTasks(true);
+    initializeTasks(true);
 }
 
 function addProjectNavListener() {

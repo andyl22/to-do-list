@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';
 import '@fortawesome/fontawesome-free/js/regular';
 import '@fortawesome/fontawesome-free/js/brands';
-import { displayTasks, addTasksController } from "./tasks";
+import { initializeTasks, addTasksController } from "./tasks";
 import { projectDropdown, toggleList } from "./sidenav";
 import { initalizeProjects,  initializeNewProjectInputs} from "./project";
 
@@ -21,7 +21,7 @@ function init() {
     document.querySelector(".projects-list-btn").addEventListener("click", projectDropdown);
     document.getElementById("new-project-btn").addEventListener("click", initializeNewProjectInputs);
     initalizeProjects();
-    displayTasks(true);
+    initializeTasks(true);
 }
 
 init();

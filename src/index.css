@@ -162,11 +162,28 @@ h2 {
     padding: 5px 15px;
 }
 
-.additional-info-container {
+.summary-info-container p {
     display: flex;
+    flex: 2;
+}
+
+.summary-info-container .task-name {
+    flex: 1;
+    justify-content: flex-end;
+    margin-right: 15px;
+}
+
+.additional-info-container {
+    display: none;
     justify-content: space-between;
     border: 1px solid rgb(184, 184, 184);
     padding: 15px;
+}
+
+.task-name-dropdown {
+    cursor: pointer;
+    position: relative;
+    font-size: 15px;
 }
 
 .task-container:hover {

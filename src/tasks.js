@@ -2,16 +2,19 @@ import { setUpModalTemplate } from "./modal.js";
 import { activeProject } from "./project.js";
 import moment from "moment";
 
-function displayTasks(refreshPageBypass = false) {
-    const taskList = activeProject.tasks
+function initializeTasks(refreshPageBypass = false) {
+    taskCreatorInitator();
 
-    if (taskList != []) {
-        if (refreshPageBypass == true) {
-            if (taskList) {
-                taskList.forEach(task => taskController(task));}
-            } else {
-                let task = taskList[taskList.length-1];
-                taskController(task);
+    function taskCreatorInitator() {
+        const taskList = activeProject.tasks
+        if (taskList != []) {
+            if (refreshPageBypass == true) {
+                if (taskList) {
+                    taskList.forEach(task => taskController(task));}
+                } else {
+                    let task = taskList[taskList.length-1];
+                    taskController(task);
+                }
             }
         }
 
@@ -19,6 +22,7 @@ function displayTasks(refreshPageBypass = false) {
         let taskDiv = createTaskElements(task);
         let taskPriority = calculateTaskPriority(task.dueDate);
         displayTaskByPriority(taskPriority, taskDiv);
+        addTaskDropDownListener(taskDiv);
     }
 
     function createTaskElements(task) {
@@ -32,13 +36,15 @@ function displayTasks(refreshPageBypass = false) {
         const dueDate = document.createElement("p");
         const description = document.createElement("p");
         const dropDownArrow = document.createElement("i")
-        dropDownArrow.className = "fa fa-caret-down";
+        name.className = "task-name";
+        dropDownArrow.className = "task-name-dropdown";
+        dropDownArrow.textContent = "▼";
         name.textContent = task.name + " ";
         dueDate.textContent = moment(task.dueDate).format("MMM Do YY"); ;
         description.textContent = task.name;
-        name.append(dropDownArrow);
         summaryInfo.appendChild(dueDate);
         summaryInfo.appendChild(name);
+        summaryInfo.append(dropDownArrow);
         additionalInfoContainer.appendChild(description);
         taskDiv.appendChild(summaryInfo);
         taskDiv.appendChild(additionalInfoContainer);
@@ -62,6 +68,23 @@ function displayTasks(refreshPageBypass = false) {
 
         priorityList.appendChild(taskDiv);
     }
+
+    function addTaskDropDownListener(taskDiv) {
+        taskDiv.childNodes[0].querySelector(".task-name-dropdown").addEventListener("click", toggleInfoDisplay)
+    }
+
+    function toggleInfoDisplay(e) {
+        let nodeStyle = e.path[2].childNodes[1];
+        if (nodeStyle.style.display == "" || nodeStyle.style.display == "none") {
+            nodeStyle.style.display = "flex";
+            e.target.textContent = "▲"
+        } else {
+            nodeStyle.style.display = "none";
+            e.target.textContent = "▼"
+        }
+    }
+
+
 }
 function addTask(task) {
     activeProject.tasks.push(task);
@@ -129,7 +152,7 @@ function addInputsHandler(e) {
     let [name, duedate, description] = getInputValues();
     let taskElement = taskFactory(name, duedate, description);
     storeTask(taskElement);
-    displayTasks();
+    initializeTasks();
     cleanInputs();
 
     function getInputValues() {
@@ -161,4 +184,4 @@ const taskFactory = function (name, dueDate, description) {
     return task;
 }
 
-export { displayTasks, addTasksController };
+export { initializeTasks, addTasksController };
