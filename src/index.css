@@ -53,6 +53,7 @@ main {
 
 .nav-bar {
     display: none;
+    position: fixed;
     flex-direction: column;
     background: rgb(95, 64, 182);
     height: fit-content;
