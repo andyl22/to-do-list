@@ -124,17 +124,17 @@ function displayProjects() {
   }
 }
 
-function initalizeProjects() {
-  function getActiveProject() {
-    for (let i = 0; i < localStorage.length; i += 1) {
-      const project = JSON.parse(localStorage.getItem(`projectID-${i}`));
-      if (project.active === true) {
-        return project;
-      }
+function getActiveProject() {
+  for (let i = 0; i < localStorage.length; i += 1) {
+    const project = JSON.parse(localStorage.getItem(`projectID-${i}`));
+    if (project.active === true) {
+      return project;
     }
-    return localStorage.getItem('projectID-0');
   }
+  return localStorage.getItem('projectID-0');
+}
 
+function initalizeProjects() {
   if (localStorage.length === 0) {
     localStorage.setItem('projectID-0', JSON.stringify(createNewProject('My First Project')));
     activeProject = JSON.parse(localStorage.getItem('projectID-0'));
@@ -149,4 +149,6 @@ function initalizeProjects() {
   addProjectNavListener();
 }
 
-export { initalizeProjects, initializeNewProjectInputs, activeProject };
+export {
+  initalizeProjects, initializeNewProjectInputs, getActiveProject, activeProject,
+};

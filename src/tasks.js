@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { setUpModalTemplate } from './modal';
-import { activeProject } from './project';
+import { getActiveProject, activeProject } from './project';
 
 function initializeTasks(refreshPageBypass = false) {
   function createTaskElements(task) {
@@ -15,14 +15,18 @@ function initializeTasks(refreshPageBypass = false) {
     const description = document.createElement('p');
     const dropDownArrow = document.createElement('i');
     const summaryPriorityIndicator = document.createElement('div');
+    const deleteBtn = document.createElement('p');
+    deleteBtn.textContent = '×';
+    deleteBtn.className = 'delete-btn';
     summaryPriorityIndicator.className = 'priority-color-indicator';
     name.className = 'task-name';
     dropDownArrow.className = 'task-name-dropdown';
     dropDownArrow.textContent = '▼';
-    name.textContent = `${task.name} `;
+    name.textContent = `${task.name}`;
     dueDate.textContent = moment(task.dueDate).format('MMM Do YY');
     description.textContent = task.description;
     summaryInfo.appendChild(summaryPriorityIndicator);
+    summaryInfo.appendChild(deleteBtn);
     summaryInfo.appendChild(dueDate);
     summaryInfo.appendChild(name);
     summaryInfo.append(dropDownArrow);
@@ -77,12 +81,29 @@ function initializeTasks(refreshPageBypass = false) {
     taskDiv.childNodes[0].querySelector('.task-name-dropdown').addEventListener('click', toggleInfoDisplay);
   }
 
+  function completeTask(e) {
+    const name = e.target.parentNode.childNodes[3];
+    const date = e.target.parentNode.childNodes[2];
+    const projectData = getActiveProject();
+    projectData.tasks.forEach((value, i) => {
+      if (value.name === name.textContent && moment(value.dueDate).format('MMM Do YY') === date.textContent) {
+        e.target.parentNode.parentNode.remove();
+        projectData.tasks.splice(i, 1);
+        localStorage.setItem(projectData.id, JSON.stringify(projectData));
+      }
+    });
+  }
+
+  function addTaskCompleteListener(taskDiv) {
+    taskDiv.childNodes[0].querySelector('.delete-btn').addEventListener('click', completeTask);
+  }
+
   function taskController(task) {
     const taskDiv = createTaskElements(task);
-    console.log(task);
     const taskPriority = calculateTaskPriority(task.dueDate);
     displayTaskByPriority(taskPriority, taskDiv);
     addTaskDropDownListener(taskDiv);
+    addTaskCompleteListener(taskDiv);
   }
 
   function taskCreatorInitator() {
