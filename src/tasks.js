@@ -67,12 +67,14 @@ function initializeTasks(refreshPageBypass = false) {
   }
 
   function toggleInfoDisplay(e) {
-    const nodeStyle = e.path[2].childNodes[1];
-    if (nodeStyle.style.display === '' || nodeStyle.style.display === 'none') {
-      nodeStyle.style.display = 'flex';
+    const node = e.path[2].childNodes[1];
+    if (node.style.display === '' || node.style.display === 'none') {
+      node.style.display = 'flex';
       e.target.textContent = '▲';
+      node.parentNode.classList.add('task-container-active');
     } else {
-      nodeStyle.style.display = 'none';
+      node.style.display = 'none';
+      node.parentNode.classList.remove('task-container-active');
       e.target.textContent = '▼';
     }
   }

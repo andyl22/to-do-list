@@ -224,6 +224,10 @@ h2 {
     box-shadow: -5px 5px 5px 0px gray;
 }
 
+.task-container-active {
+    box-shadow: -5px 5px 5px 0px gray;
+}
+
 .priority-color-indicator {
     width: 15px;
     margin-right: 5px;
